@@ -20,8 +20,11 @@ export const site = {
   locale: "pt-BR",
 
   contact: {
-    /** Só dígitos, com DDI e DDD (ex.: 5511912345678). Sem número, os botões de WhatsApp avisam que o canal não está configurado. */
-    whatsapp: env(process.env.NEXT_PUBLIC_WHATSAPP_NUMBER)?.replace(/\D/g, "") ?? null,
+    /**
+     * WhatsApp da DLK: só dígitos, com 55 + DDD. Padrão: (11) 5306-2349.
+     * Pode ser trocado sem mexer no código pela variável NEXT_PUBLIC_WHATSAPP_NUMBER.
+     */
+    whatsapp: (env(process.env.NEXT_PUBLIC_WHATSAPP_NUMBER) ?? "551153062349").replace(/\D/g, ""),
     email: env(process.env.NEXT_PUBLIC_CONTACT_EMAIL),
     city: env(process.env.NEXT_PUBLIC_CITY) ?? "Brasil",
   },

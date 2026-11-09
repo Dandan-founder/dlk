@@ -46,7 +46,7 @@ Copie `.env.example` para `.env.local` e preencha:
 | Variável | Para quê | Sem ela |
 |---|---|---|
 | `NEXT_PUBLIC_SITE_URL` | Domínio final (SEO, sitemap, Open Graph) | Usa `https://dlk.com.br` |
-| `NEXT_PUBLIC_WHATSAPP_NUMBER` | Botões de WhatsApp com mensagem por contexto | Botões levam ao formulário de orçamento |
+| `NEXT_PUBLIC_WHATSAPP_NUMBER` | Troca o número dos botões de WhatsApp | Usa o número padrão da DLK, (11) 5306-2349, definido em `src/config/site.ts` |
 | `NEXT_PUBLIC_CONTACT_EMAIL` | E-mail no rodapé, na privacidade e no fallback do formulário | Não aparece |
 | `NEXT_PUBLIC_*_URL` (redes) | Links de Instagram, LinkedIn, Behance | Não aparecem |
 | `LEADS_WEBHOOK_URL` | Recebe os pedidos de orçamento (POST JSON) | O formulário avisa que o envio automático não está ativo e oferece WhatsApp, e-mail ou copiar o resumo. **Nunca simula sucesso.** |
@@ -105,7 +105,7 @@ Resultados da última execução: [`docs/TESTES.md`](docs/TESTES.md).
 
 ## Pendências que dependem da DLK
 
-- Número de WhatsApp, e-mail, cidade e redes sociais reais.
+- E-mail, cidade e redes sociais reais (o WhatsApp já está configurado: (11) 5306-2349).
 - Webhook de recebimento de orçamentos (`LEADS_WEBHOOK_URL`).
 - Domínio final.
 - Revisão jurídica de `/privacidade` e `/termos`.
