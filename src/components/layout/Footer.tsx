@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Logo } from "@/components/brand/Logo";
+import { FooterSignature } from "./FooterSignature";
 import { nav, site } from "@/config/site";
 import { services } from "@/data/services";
 import { projects } from "@/data/projects";
@@ -102,7 +102,7 @@ export function Footer() {
 
       {/* Assinatura: a marca em escala de outdoor */}
       <div className="mx-auto mt-20 max-w-[1800px] px-[var(--gutter)] md:mt-28">
-        <Logo className="w-full opacity-[0.96]" title={null} />
+        <FooterSignature />
       </div>
 
       <div className="mx-auto mt-8 flex max-w-[1800px] flex-wrap items-center justify-between gap-4 border-t border-line px-[var(--gutter)] py-6 text-[0.82rem] text-muted">

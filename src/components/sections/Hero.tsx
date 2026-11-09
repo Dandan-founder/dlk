@@ -21,7 +21,8 @@ export function Hero() {
         gsap
           .timeline({ scrollTrigger: { trigger: next, start: "top bottom", end: "top top", scrub: true } })
           .to("[data-hero-inner]", { scale: 0.92, yPercent: -4, ease: "none" }, 0)
-          .to("[data-hero-shade]", { opacity: 0.65, ease: "none" }, 0);
+          .to("[data-hero-shade]", { opacity: 0.65, ease: "none" }, 0)
+          .to(el.querySelectorAll(".hero-line"), { xPercent: (i: number) => [-14, 9, -6][i] ?? 0, ease: "none" }, 0);
     });
     // O navegador inclina levemente em direção ao cursor
     mm.add(MQ.fine, () => {

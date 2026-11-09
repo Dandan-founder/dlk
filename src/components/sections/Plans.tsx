@@ -6,7 +6,7 @@ import { plans } from "@/data/content";
 import { site } from "@/config/site";
 import { ButtonLink } from "@/components/ui/Button";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
-import { splitReveal, useGsap } from "@/lib/gsap";
+import { gsap, MQ, splitReveal, useGsap } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 
 /** Planos: três formatos de serviço; preços configuráveis em src/data/content.ts (null = sob consulta). */
@@ -14,6 +14,30 @@ export function Plans() {
   const root = useRef<HTMLElement>(null);
   useGsap(root, (mm, el) => {
     splitReveal(mm, Array.from(el.querySelectorAll("[data-split]")));
+    // cartões inclinam em direção ao mouse (perspectiva), voltam com mola ao sair
+    mm.add(MQ.fine, () => {
+      const cards = Array.from(el.querySelectorAll<HTMLElement>("[data-tilt]"));
+      const offs = cards.map((c) => {
+        const rx = gsap.quickTo(c, "rotationX", { duration: 0.6, ease: "power3.out" });
+        const ry = gsap.quickTo(c, "rotationY", { duration: 0.6, ease: "power3.out" });
+        gsap.set(c, { transformPerspective: 1100 });
+        const move = (e: PointerEvent) => {
+          const r = c.getBoundingClientRect();
+          ry(((e.clientX - r.left) / r.width - 0.5) * 12);
+          rx(-((e.clientY - r.top) / r.height - 0.5) * 10);
+        };
+        const leave = () => {
+          gsap.to(c, { rotationX: 0, rotationY: 0, duration: 1, ease: "elastic.out(1, 0.5)" });
+        };
+        c.addEventListener("pointermove", move);
+        c.addEventListener("pointerleave", leave);
+        return () => {
+          c.removeEventListener("pointermove", move);
+          c.removeEventListener("pointerleave", leave);
+        };
+      });
+      return () => offs.forEach((f) => f());
+    });
   }, [], { defer: true });
 
   return (
@@ -36,6 +60,7 @@ export function Plans() {
           {plans.map((p) => (
             <article
               key={p.id}
+              data-tilt
               data-reveal
               className={cn(
                 "group relative flex flex-col overflow-hidden rounded-3xl border p-8 transition-[transform,border-color] duration-700 ease-[var(--ease-out)] hover:-translate-y-2 md:p-10",

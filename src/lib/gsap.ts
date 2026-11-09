@@ -53,17 +53,21 @@ export function useGsap(scope: RefObject<HTMLElement | null>, setup: (mm: gsap.M
 export function splitReveal(mm: gsap.MatchMedia, targets: Element[], opts: { delay?: number; scroll?: boolean; stagger?: number } = {}) {
   mm.add(MQ.motion, () => {
     const splits = targets.map((t) =>
+      // Letra por letra, dentro da máscara de cada linha: sobem girando em leque (só transform)
       SplitText.create(t, {
-        type: "lines",
+        type: "lines,chars",
         mask: "lines",
         linesClass: "split-line",
         autoSplit: true,
         onSplit: (self) => {
           (t as HTMLElement).style.opacity = "1";
-          return gsap.from(self.lines, {
-            yPercent: 115,
-            duration: 1.25,
-            stagger: opts.stagger ?? 0.09,
+          return gsap.from(self.chars, {
+            yPercent: 120,
+            rotate: 14,
+            transformOrigin: "0% 100%",
+            duration: 1.1,
+            ease: "expo.out",
+            stagger: { each: opts.stagger ?? 0.018, from: "start" },
             delay: opts.delay ?? 0,
             scrollTrigger: opts.scroll === false ? undefined : { trigger: t, start: "top 88%", once: true },
           });

@@ -8,6 +8,8 @@ import { Footer } from "@/components/layout/Footer";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { Cursor } from "@/components/layout/Cursor";
 import { MobileCta } from "@/components/layout/MobileCta";
+import { ScrollProgress } from "@/components/motion/ScrollProgress";
+import { PageTransition } from "@/components/motion/PageTransition";
 
 const display = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-display-face", display: "swap", axes: ["opsz", "wdth"] });
 const text = Instrument_Sans({ subsets: ["latin"], variable: "--font-text", display: "swap", axes: ["wdth"] });
@@ -77,6 +79,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <MobileCta />
         </SmoothScroll>
         <Cursor />
+        <ScrollProgress />
+        <PageTransition />
       </body>
     </html>
   );

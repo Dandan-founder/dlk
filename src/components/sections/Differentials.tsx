@@ -13,11 +13,14 @@ export function Differentials() {
       // folha clara: os cantos se endireitam ao chegar no topo
       gsap.fromTo(el, { borderTopLeftRadius: "3.5rem", borderTopRightRadius: "3.5rem" }, { borderTopLeftRadius: "0rem", borderTopRightRadius: "0rem", ease: "none", scrollTrigger: { trigger: el, start: "top 60%", end: "top top", scrub: true } });
       gsap.from(el.querySelectorAll("[data-cell]"), {
+        rotateX: -95,
         opacity: 0,
-        y: 40,
-        duration: 1.1,
-        stagger: { each: 0.06, grid: "auto", from: "start" },
-        scrollTrigger: { trigger: el.querySelector("[data-grid]"), start: "top 80%", once: true },
+        transformPerspective: 900,
+        transformOrigin: "50% 0%",
+        duration: 1.2,
+        ease: "expo.out",
+        stagger: { each: 0.08, grid: "auto", from: "start" },
+        scrollTrigger: { trigger: el.querySelector("[data-grid]"), start: "top 78%", once: true },
       });
     });
   }, [], { defer: true });

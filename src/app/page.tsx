@@ -8,6 +8,7 @@ import { Differentials } from "@/components/sections/Differentials";
 import { Plans } from "@/components/sections/Plans";
 import { Faq } from "@/components/sections/Faq";
 import { FinalCta } from "@/components/sections/FinalCta";
+import { VelocityMarquee } from "@/components/motion/VelocityMarquee";
 
 export default function Home() {
   return (
@@ -19,10 +20,12 @@ export default function Home() {
       </div>
       <Services />
       <Work />
+      <VelocityMarquee items={["Sites", "Landing pages", "Lojas virtuais", "Agendamento", "Redesign"]} />
       <Showcase />
       <Process />
       <Differentials />
       <Plans />
+      <VelocityMarquee tone="dot" items={["Design autoral", "Mobile first", "Performance", "SEO técnico", "Conversão"]} />
       <Faq />
       <FinalCta />
     </>
