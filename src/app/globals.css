@@ -1,26 +1,375 @@
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════════════════════════
+   DLK — design tokens
+   Base: o azul-marinho da marca (#13213C) levado ao quase-preto.
+   Destaque: o laranja do ponto do logotipo (#F26A1C), usado com parcimônia.
+   ═══════════════════════════════════════════════════════════════ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --void: #070b16; /* fundo principal */
+  --ink: #0c1222; /* fundo secundário */
+  --ink-2: #111a2e;
+  --navy: #13213c; /* cor institucional */
+  --line: rgba(232, 236, 245, 0.1);
+  --line-strong: rgba(232, 236, 245, 0.2);
+  --paper: #f4f3ef; /* seções claras, como a versão clara do logo */
+  --paper-2: #e9e7e1;
+  --text: #f4f5f8;
+  --muted: #9ca5ba;
+  --muted-dark: #5b6478;
+  --dot: #f26a1c; /* o ponto */
+  --dot-soft: #ff8a47;
+  --ok: #4fc38a;
+  --danger: #ff6b5b;
+
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --header-h: 4.5rem;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-void: var(--void);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-navy: var(--navy);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-muted-dark: var(--muted-dark);
+  --color-dot: var(--dot);
+  --color-dot-soft: var(--dot-soft);
+  --color-ok: var(--ok);
+  --color-danger: var(--danger);
+  --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+  --ease-out: var(--ease-out);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--void);
+  color-scheme: dark;
+  -webkit-text-size-adjust: 100%;
+}
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: clip;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--void);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--dot);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--dot);
+  outline-offset: 3px;
+}
+
+/* Títulos gigantes: grotesca pesada, entrelinha curta, tracking negativo */
+.display {
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 0.9;
+  text-wrap: balance;
+}
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.measure {
+  max-width: 62ch;
+}
+
+/* Linhas reveladas por máscara (SplitText) */
+.split-line {
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+/* Grão sutil sobre as seções escuras */
+.grain {
+  position: relative;
+  isolation: isolate;
+}
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Fio de grade editorial */
+.hairline {
+  background-image: linear-gradient(to right, var(--line) 1px, transparent 1px);
+  background-size: calc((100% - 2 * var(--gutter)) / 12) 100%;
+  background-position: var(--gutter) 0;
+}
+
+/* Elementos que o JS anima começam visíveis; só escondemos com JS + movimento ativo */
+/* Esconde só visualmente (opacity): o conteúdo continua acessível a leitores de tela antes de aparecer */
+html.js-motion [data-hide] {
+  opacity: 0;
+}
+
+/* Cursor personalizado: o cursor do sistema continua em campos de texto */
+html.has-cursor,
+html.has-cursor a,
+html.has-cursor button,
+html.has-cursor [role="button"],
+html.has-cursor label {
+  cursor: none;
+}
+html.has-cursor input,
+html.has-cursor textarea,
+html.has-cursor select {
+  cursor: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes scroll-cue {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(220%);
+  }
+}
+@keyframes pulse-dot {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.7;
+  }
+}
+
+/* ───────── Abertura (carregamento) — CSS puro: não espera o JavaScript ───────── */
+#intro {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  background: var(--void);
+  clip-path: inset(0 0 0 0);
+  animation: intro-out 0.8s var(--ease-in-out) 0.7s forwards;
+}
+#intro .intro-mark {
+  width: min(42vw, 15rem);
+  overflow: hidden;
+}
+#intro [data-logo-letters] {
+  animation: intro-letters 0.6s var(--ease-out) 0.05s both;
+}
+#intro [data-logo-dot] {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: intro-dot 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) 0.32s both;
+}
+#intro .intro-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: var(--dot);
+  transform-origin: 0 50%;
+  animation: intro-bar 0.75s var(--ease-in-out) both;
+}
+html.intro-skip #intro,
+html.intro-done #intro {
+  display: none;
+}
+@keyframes intro-out {
+  to {
+    clip-path: inset(0 0 100% 0);
+    visibility: hidden;
+  }
+}
+@keyframes intro-letters {
+  from {
+    transform: translateY(105%);
+  }
+}
+@keyframes intro-dot {
+  from {
+    transform: scale(0);
+  }
+}
+@keyframes intro-bar {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+/* Linhas do título do hero: sobem por máscara logo na primeira pintura */
+:root {
+  --hero-delay: 0.7s;
+}
+html.intro-skip {
+  --hero-delay: 0.1s;
+}
+.hero-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+.hero-line > span {
+  display: block;
+  animation: line-up 1.3s var(--ease-out) both;
+  animation-delay: calc(var(--hero-delay) + var(--i, 0) * 0.1s);
+}
+.hero-fade {
+  animation: fade-up 1.1s var(--ease-out) both;
+  animation-delay: calc(var(--hero-delay) + var(--d, 0.4s));
+}
+@keyframes line-up {
+  from {
+    transform: translateY(108%) rotate(2deg);
+  }
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #intro {
+    display: none;
+  }
+}
+
+/* O ponto final do título cai no lugar depois das linhas */
+.hero-dot {
+  animation: dot-drop 1s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation-delay: calc(var(--hero-delay) + 0.6s);
+}
+@keyframes dot-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-2.4em) scale(0.3);
+  }
+  60% {
+    opacity: 1;
+  }
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+}
+
+/* Mini-ilustrações dos serviços */
+.sv-in {
+  animation: sv-in 0.8s var(--ease-out) both;
+}
+.sv-pop {
+  animation: sv-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s both;
+}
+.sv-pin {
+  animation: sv-pin 1.6s var(--ease-out) infinite alternate;
+}
+.sv-draw {
+  stroke-dasharray: 1;
+  animation: sv-draw 1.6s var(--ease-out) both;
+}
+.sv-wipe {
+  animation: sv-wipe 3.2s var(--ease-in-out) infinite alternate;
+}
+.sv-wipe-line {
+  animation: sv-wipe-line 3.2s var(--ease-in-out) infinite alternate;
+}
+@keyframes sv-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+@keyframes sv-pop {
+  from {
+    transform: scale(0);
+  }
+}
+@keyframes sv-pin {
+  to {
+    translate: 0 -6px;
+  }
+}
+@keyframes sv-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+@keyframes sv-wipe {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes sv-wipe-line {
+  from {
+    left: 0;
+  }
+  to {
+    left: 100%;
+  }
+}
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+    filter: blur(4px);
+  }
 }
