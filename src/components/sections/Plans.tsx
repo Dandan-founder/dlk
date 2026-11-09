@@ -4,10 +4,9 @@ import { useRef } from "react";
 import { Check } from "lucide-react";
 import { plans } from "@/data/content";
 import { site } from "@/config/site";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { ButtonLink } from "@/components/ui/Button";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
-import { revealBatch, splitReveal, useGsap } from "@/lib/gsap";
+import { splitReveal, useGsap } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 
 /** Planos: três formatos de serviço; preços configuráveis em src/data/content.ts (null = sob consulta). */
@@ -15,7 +14,6 @@ export function Plans() {
   const root = useRef<HTMLElement>(null);
   useGsap(root, (mm, el) => {
     splitReveal(mm, Array.from(el.querySelectorAll("[data-split]")));
-    revealBatch(mm, el);
   }, [], { defer: true });
 
   return (
@@ -23,8 +21,7 @@ export function Plans() {
       <div className="mx-auto max-w-[1800px] px-[var(--gutter)]">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <Eyebrow>Planos</Eyebrow>
-            <h2 id="planos-title" data-split data-hide className="display mt-6 text-[clamp(2.8rem,6.8vw,7.4rem)]">
+            <h2 id="planos-title" data-split data-hide className="display text-[clamp(2.8rem,6.8vw,7.4rem)]">
               Um formato
               <br />
               para cada fase<span className="text-dot">.</span>
@@ -45,14 +42,14 @@ export function Plans() {
                 p.highlight ? "border-dot/60 bg-gradient-to-b from-navy to-ink" : "border-line bg-ink",
               )}
             >
-              {p.highlight && <span className="absolute right-6 top-6 rounded-full bg-dot px-3 py-1 font-mono text-[0.65rem] uppercase tracking-[0.16em] text-void">Mais completo</span>}
-              <h3 className="text-[clamp(2.6rem,4vw,3.6rem)] font-bold leading-none tracking-[-0.05em]">
+              {p.highlight && <span className="absolute right-6 top-6 rounded-full bg-dot px-3 py-1 text-[0.8rem] font-medium text-void">Mais completo</span>}
+              <h3 className="display text-[clamp(3rem,4.8vw,4.6rem)]">
                 {p.name}
                 <span className="text-dot">.</span>
               </h3>
               <p className="mt-4 min-h-[3.2em] text-[1.02rem] leading-relaxed text-muted">{p.tagline}</p>
               <p className="mt-8 border-y border-line py-5">
-                <span className="block font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted">Investimento</span>
+                <span className="block text-[0.85rem] text-muted">Investimento</span>
                 <span className="mt-1 block text-[1.5rem] font-semibold tracking-[-0.02em]">{p.price ?? "Sob consulta"}</span>
               </p>
               <ul className="mt-8 grid flex-1 content-start gap-3.5">

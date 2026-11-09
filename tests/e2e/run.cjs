@@ -190,11 +190,11 @@ async function open(ctx, url) {
       const sel = p.getByRole("tab", { name: "Clínica Sofisticada" });
       assert((await sel.getAttribute("aria-selected")) === "true", "seta não trocou de aba");
       assert(await sel.evaluate((t) => t === document.activeElement), "foco não acompanhou a aba");
-      await p.getByText("Prévia de layout · ilustrativa").waitFor();
+      await p.getByText("Prévia de layout ilustrativa").waitFor();
       await p.getByRole("button", { name: "Celular", exact: true }).click();
       assert((await p.getByRole("button", { name: "Celular", exact: true }).getAttribute("aria-pressed")) === "true", "alternância");
       await p.getByRole("tab", { name: "Barbearia Premium" }).click();
-      await p.getByText("Capturas reais · projeto conceito").waitFor();
+      await p.getByText("Capturas reais do projeto conceito").waitFor();
       await ctx.close();
     });
 
@@ -250,6 +250,21 @@ async function open(ctx, url) {
         await ctx.close();
       });
     }
+
+    await test("portfólio: com o mouse em cima, o site inteiro rola dentro da moldura", async () => {
+      const ctx = await browser.newContext(desktop);
+      const p = await open(ctx, "/projetos");
+      await p.waitForTimeout(1800);
+      const card = p.getByRole("link", { name: /Blackstone Barber Club.*Ver estudo de caso/ });
+      const img = card.locator("img[src*=full]");
+      const y0 = await img.evaluate((e) => e.getBoundingClientRect().top);
+      await card.hover();
+      await p.waitForTimeout(3500);
+      const y1 = await img.evaluate((e) => e.getBoundingClientRect().top);
+      assert(y0 - y1 > 300, `a página não rolou (${Math.round(y0 - y1)} px)`);
+      await p.screenshot({ path: path.join(OUT, "portfolio-hover.png") });
+      await ctx.close();
+    });
 
     await test("perguntas frequentes: acordeão pelo teclado", async () => {
       const ctx = await browser.newContext(desktop);

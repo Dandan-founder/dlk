@@ -2,7 +2,6 @@
 
 import { useRef, useState } from "react";
 import { process } from "@/data/content";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { gsap, MQ, ScrollTrigger, splitReveal, useGsap } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 
@@ -33,8 +32,7 @@ export function Process() {
       <div className="mx-auto grid max-w-[1800px] gap-16 px-[var(--gutter)] lg:grid-cols-12">
         <div className="lg:col-span-5">
           <div className="lg:sticky lg:top-32">
-            <Eyebrow>Como trabalhamos</Eyebrow>
-            <h2 id="processo-title" data-split data-hide className="display mt-6 text-[clamp(2.8rem,6.4vw,7rem)]">
+            <h2 id="processo-title" data-split data-hide className="display text-[clamp(2.8rem,6.4vw,7rem)]">
               Da ideia
               <br />
               ao digital<span className="text-dot">.</span>
@@ -50,7 +48,7 @@ export function Process() {
                   ))}
                 </span>
               </span>
-              <span className="mb-3 font-mono text-sm text-muted">/ 06</span>
+              <span className="mb-3 text-[0.95rem] text-muted">de 06</span>
             </div>
           </div>
         </div>
@@ -61,7 +59,7 @@ export function Process() {
           {process.map((p, i) => (
             <li key={p.n} data-step className="relative pb-16 pl-12 last:pb-0 md:pb-24 md:pl-16">
               <span aria-hidden className={cn("absolute left-0 top-2 h-[0.95rem] w-[0.95rem] rounded-full border-2 transition-all duration-500", i <= current ? "border-dot bg-dot shadow-[0_0_0_6px_rgba(242,106,28,.15)]" : "border-line-strong bg-void")} />
-              <p className="font-mono text-xs text-muted">Etapa {p.n}</p>
+              <p className="font-display text-[1.05rem] tabular-nums text-dot">{p.n}</p>
               <h3 className={cn("mt-3 text-[clamp(1.9rem,3.6vw,3.4rem)] font-semibold leading-none tracking-[-0.04em] transition-colors duration-500", i === current ? "text-text" : "text-text/40")}>{p.title}</h3>
               <p className={cn("mt-4 max-w-lg text-[1.05rem] leading-relaxed transition-colors duration-500", i === current ? "text-muted" : "text-muted/80")}>{p.text}</p>
             </li>

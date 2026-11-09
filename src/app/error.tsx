@@ -8,7 +8,7 @@ export default function Error({ error, reset }: { error: Error & { digest?: stri
   return (
     <section className="grid min-h-[100svh] place-items-center bg-void px-[var(--gutter)] text-center">
       <div>
-        <p className="font-mono text-xs uppercase tracking-[0.22em] text-muted">Algo deu errado</p>
+        <p className="text-[0.95rem] text-muted">Algo deu errado</p>
         <h1 className="display mt-6 text-[clamp(2.6rem,7vw,6rem)]">
           Tivemos um problema<span className="text-dot">.</span>
         </h1>

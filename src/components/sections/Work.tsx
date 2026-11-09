@@ -2,25 +2,22 @@
 
 import { useRef } from "react";
 import { projects } from "@/data/projects";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { ButtonLink } from "@/components/ui/Button";
 import { ProjectCard } from "@/components/projects/ProjectCard";
-import { revealBatch, splitReveal, useGsap } from "@/lib/gsap";
+import { splitReveal, useGsap } from "@/lib/gsap";
 
 /** Vitrine da home: projetos em composição assimétrica + aviso transparente sobre projetos conceito. */
 export function Work() {
   const root = useRef<HTMLElement>(null);
   useGsap(root, (mm, el) => {
     splitReveal(mm, Array.from(el.querySelectorAll("[data-split]")));
-    revealBatch(mm, el);
   }, [], { defer: true });
   return (
     <section ref={root} id="projetos" aria-labelledby="projetos-title" className="relative bg-void pb-28 pt-10 md:pb-40">
       <div className="mx-auto max-w-[1800px] px-[var(--gutter)]">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
-            <Eyebrow>Portfólio</Eyebrow>
-            <h2 id="projetos-title" data-split data-hide className="display mt-6 text-[clamp(3rem,8.4vw,9.4rem)]">
+            <h2 id="projetos-title" data-split data-hide className="display text-[clamp(3rem,8.4vw,9.4rem)]">
               Projetos que
               <br />
               falam por si<span className="text-dot">.</span>

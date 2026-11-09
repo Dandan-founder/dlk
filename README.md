@@ -2,18 +2,22 @@
 
 Site institucional e comercial da **DLK**, agência digital brasileira de sites, landing pages, lojas virtuais e sistemas de agendamento.
 
-- **Home:** abertura animada, hero com shader WebGL reativo ao cursor, sobre, serviços (lista + painel interativo), portfólio, vitrine "Imagine seu negócio assim" (desktop/celular), processo com linha do tempo na rolagem, diferenciais, planos, perguntas frequentes e CTA final.
+- **Home:** abertura animada, hero com um site se montando ao vivo (esqueleto → página real), sobre em folha que sobe sobre o hero, serviços (lista + painel interativo), portfólio, vitrine "Imagine seu negócio assim" (desktop/celular), processo com linha do tempo na rolagem, diferenciais, planos, perguntas frequentes e CTA final.
 - **Portfólio:** `/projetos` com filtros por categoria e `/projetos/[slug]` com estudo de caso completo. Os dois projetos atuais são **projetos conceito** (Blackstone Barber Club e Brace Pizzaria), identificados como tal em todo o site.
 - **Orçamento:** `/orcamento`, formulário em 7 etapas (React Hook Form + Zod), com pré-preenchimento pelos links do site, campo anti-robô, consentimento LGPD e envio real para um webhook configurável.
 - **Legal:** `/privacidade` e `/termos` (modelos para revisão jurídica).
 
-**Stack:** Next.js 15 (App Router) · React 19 · TypeScript · Tailwind CSS 4 · GSAP + ScrollTrigger + SplitText · Lenis · WebGL puro (shader do hero) · Radix UI · Lucide · React Hook Form · Zod · Vitest · Playwright · axe-core.
+**Stack:** Next.js 15 (App Router) · React 19 · TypeScript · Tailwind CSS 4 · GSAP + ScrollTrigger + SplitText · Lenis · Radix UI · Lucide · React Hook Form · Zod · Vitest · Playwright · axe-core.
 
 ## Identidade visual
 
-Paleta tirada do logotipo da DLK, em vez da sugestão de verde-limão: azul-marinho institucional `#13213C` levado ao quase-preto `#070B16` como fundo, e o **laranja do ponto `#F26A1C`** como única cor de destaque. O ponto do logotipo é o motivo visual do site: ele cai no lugar no fim do título do hero, cresce na seção Sobre, segue o cursor e toma a tela no CTA final. Tipografia: Inter Tight (títulos gigantes, tracking negativo) e JetBrains Mono (rótulos, como o "AGÊNCIA DIGITAL" do logo). O logotipo foi vetorizado a partir do arquivo original (`src/components/brand/Logo.tsx`).
+Paleta tirada do logotipo, em vez da sugestão de verde-limão: o **azul-marinho da marca `#13213C`** é a superfície principal (com `#0D182E` para ritmo), branco frio `#F6F7F9` nas seções claras e o **laranja do ponto `#F26A1C`** como único destaque. O ponto do logotipo é a assinatura do site: cai no fim do título do hero, vive dentro de cada botão e se expande para preenchê-lo no hover, segue o cursor e toma a tela no CTA final.
 
-Botões laranja usam texto quase preto: texto branco sobre esse laranja dá contraste 2,98:1, abaixo do mínimo de acessibilidade (4,5:1).
+Tipografia: **Bricolage Grotesque** condensada nos títulos (alta, compacta, com caráter em tamanho grande) e **Instrument Sans** no texto. Sem fonte mono, sem rótulos em caixa alta, sem setas nos botões: a estrutura é dada pela composição, não por etiquetas. Numeração só onde há sequência ou o briefing pediu (serviços, processo, diferenciais).
+
+Movimento com propósito, em três momentos: o site se montando no hero, as seções claras subindo como folhas (o hero recua por baixo) e a prévia dos projetos, que rola a página inteira no hover. O logotipo foi vetorizado a partir do arquivo original (`src/components/brand/Logo.tsx`).
+
+Botões laranja usam texto marinho: texto branco sobre esse laranja dá contraste 2,98:1, abaixo do mínimo de acessibilidade (4,5:1).
 
 ## Rodar localmente
 
@@ -93,7 +97,8 @@ Resultados da última execução: [`docs/TESTES.md`](docs/TESTES.md).
 
 - A abertura e a entrada do título do hero são **CSS puro**: aparecem na primeira pintura, sem esperar o JavaScript (LCP ≈ 0,9 s no celular simulado).
 - Animações das seções abaixo da dobra são preparadas em momento ocioso do navegador.
-- O shader do hero roda a 30 fps, em resolução reduzida, pausa fora da tela e vira imagem parada sem GPU ou com movimento reduzido.
+- O hero não usa WebGL: a "montagem" é SVG + `clip-path` (leve), pausa fora da tela e fica parada com movimento reduzido.
+- No portfólio, a captura de página inteira só carrega em dispositivos com mouse; no toque, só a capa.
 - Revelações usam `opacity`, nunca `visibility`: o conteúdo segue acessível a leitores de tela antes de animar.
 - `prefers-reduced-motion`: sem abertura, sem rolagem suave, sem cursor personalizado e sem animações contínuas.
 - Cursor personalizado só com mouse; em campos de texto volta o cursor do sistema.

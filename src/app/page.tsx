@@ -12,8 +12,11 @@ import { FinalCta } from "@/components/sections/FinalCta";
 export default function Home() {
   return (
     <>
-      <Hero />
-      <About />
+      {/* O hero fica preso e a seção Sobre sobe por cima, como uma folha */}
+      <div className="relative">
+        <Hero />
+        <About />
+      </div>
       <Services />
       <Work />
       <Showcase />

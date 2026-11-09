@@ -2,21 +2,22 @@
 
 /* ═══════════════════════════════════════════════════════════════
    DLK — design tokens
-   Base: o azul-marinho da marca (#13213C) levado ao quase-preto.
-   Destaque: o laranja do ponto do logotipo (#F26A1C), usado com parcimônia.
+   Superfície: o próprio azul-marinho da marca (#13213C) e um tom mais profundo para ritmo.
+   Claro: branco frio, como a versão clara do logotipo (não creme).
+   Destaque: o laranja do ponto do logotipo (#F26A1C) — o único acento do site.
    ═══════════════════════════════════════════════════════════════ */
 :root {
-  --void: #070b16; /* fundo principal */
-  --ink: #0c1222; /* fundo secundário */
-  --ink-2: #111a2e;
+  --void: #0d182e; /* marinho profundo */
+  --ink: #13213c; /* marinho da marca */
+  --ink-2: #1b2c4d;
   --navy: #13213c; /* cor institucional */
-  --line: rgba(232, 236, 245, 0.1);
-  --line-strong: rgba(232, 236, 245, 0.2);
-  --paper: #f4f3ef; /* seções claras, como a versão clara do logo */
-  --paper-2: #e9e7e1;
+  --line: rgba(214, 224, 245, 0.13);
+  --line-strong: rgba(214, 224, 245, 0.26);
+  --paper: #f6f7f9; /* branco frio */
+  --paper-2: #e8ecf2;
   --text: #f4f5f8;
-  --muted: #9ca5ba;
-  --muted-dark: #5b6478;
+  --muted: #a9b3c8;
+  --muted-dark: #56627c;
   --dot: #f26a1c; /* o ponto */
   --dot-soft: #ff8a47;
   --ok: #4fc38a;
@@ -44,13 +45,14 @@
   --color-dot-soft: var(--dot-soft);
   --color-ok: var(--ok);
   --color-danger: var(--danger);
-  --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+  --font-sans: var(--font-text), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display-face), var(--font-text), sans-serif;
+  --font-mono: var(--font-text), ui-sans-serif, sans-serif;
   --ease-out: var(--ease-out);
 }
 
 html {
-  background: var(--void);
+  background: var(--ink);
   color-scheme: dark;
   -webkit-text-size-adjust: 100%;
 }
@@ -66,7 +68,7 @@ html.lenis body {
 }
 
 body {
-  background: var(--void);
+  background: var(--ink);
   color: var(--text);
   font-family: var(--font-sans);
   font-feature-settings: "ss01", "cv11";
@@ -87,17 +89,20 @@ body {
 }
 
 /* Títulos gigantes: grotesca pesada, entrelinha curta, tracking negativo */
+/* Títulos: Bricolage Grotesque condensada — alta, compacta, com tinta generosa em tamanho grande */
 .display {
+  font-family: var(--font-display);
   font-weight: 700;
-  letter-spacing: -0.045em;
-  line-height: 0.9;
+  font-stretch: 80%;
+  font-optical-sizing: auto;
+  letter-spacing: -0.008em;
+  line-height: 0.88;
   text-wrap: balance;
 }
+/* Rótulo discreto: frase normal, sem caixa alta nem espaçamento largo */
 .eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+  font-size: 0.95rem;
+  letter-spacing: 0;
 }
 .measure {
   max-width: 62ch;
@@ -109,19 +114,10 @@ body {
   margin-bottom: -0.08em;
 }
 
-/* Grão sutil sobre as seções escuras */
+/* .grain: só posicionamento (a textura de granulado foi removida: era decorativa e pesava no LCP) */
 .grain {
   position: relative;
   isolation: isolate;
-}
-.grain::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0.06;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 /* Fio de grade editorial */
@@ -372,4 +368,41 @@ html.intro-skip {
     transform: translateY(16px);
     filter: blur(4px);
   }
+}
+
+/* Esqueleto do BuildReel: cada traço se desenha em sequência */
+.wf > * {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: wf-draw 0.9s var(--ease-in-out) forwards;
+  animation-play-state: var(--wf-run, running);
+}
+.wf > *:nth-child(1) { animation-delay: 0.0s; }
+.wf > *:nth-child(2) { animation-delay: 0.055s; }
+.wf > *:nth-child(3) { animation-delay: 0.11s; }
+.wf > *:nth-child(4) { animation-delay: 0.165s; }
+.wf > *:nth-child(5) { animation-delay: 0.22s; }
+.wf > *:nth-child(6) { animation-delay: 0.275s; }
+.wf > *:nth-child(7) { animation-delay: 0.33s; }
+.wf > *:nth-child(8) { animation-delay: 0.385s; }
+.wf > *:nth-child(9) { animation-delay: 0.44s; }
+.wf > *:nth-child(10) { animation-delay: 0.495s; }
+.wf > *:nth-child(11) { animation-delay: 0.55s; }
+.wf > *:nth-child(12) { animation-delay: 0.605s; }
+.wf > *:nth-child(13) { animation-delay: 0.66s; }
+.wf > *:nth-child(14) { animation-delay: 0.715s; }
+@keyframes wf-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Todos os títulos usam a fonte de display (levemente condensada); o texto corrido segue na Instrument Sans */
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display);
+  font-stretch: 86%;
+  font-optical-sizing: auto;
 }

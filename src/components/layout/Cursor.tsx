@@ -85,7 +85,7 @@ export function Cursor() {
             backgroundColor: mode === "view" ? "var(--dot)" : mode === "link" ? "rgba(242,106,28,.08)" : "transparent",
           }}
         >
-          <span className={`font-mono text-[0.68rem] font-medium uppercase tracking-[0.18em] text-white transition-opacity duration-300 ${mode === "view" ? "opacity-100" : "opacity-0"}`}>{label}</span>
+          <span className={`text-[0.85rem] font-medium text-void transition-opacity duration-300 ${mode === "view" ? "opacity-100" : "opacity-0"}`}>{label}</span>
         </div>
       </div>
       <div ref={dot} className="absolute left-0 top-0">

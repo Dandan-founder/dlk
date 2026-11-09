@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function ProjetosPage() {
   return (
     <>
-      <PageHero eyebrow="Portfólio" title={["Projetos que", "falam por si"]}>
+      <PageHero title={["Projetos que", "falam por si"]}>
         <p>
           Cada projeto aqui foi desenhado e desenvolvido pela DLK. Os marcados como <strong className="font-medium text-text">projeto conceito</strong> são demonstrações completas, com negócios e dados fictícios, criadas para mostrar o que entregamos na prática.
         </p>

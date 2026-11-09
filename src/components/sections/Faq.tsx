@@ -5,16 +5,14 @@ import { useRef } from "react";
 import { Plus } from "lucide-react";
 import { faq } from "@/data/content";
 import { site } from "@/config/site";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
-import { revealBatch, splitReveal, useGsap } from "@/lib/gsap";
+import { splitReveal, useGsap } from "@/lib/gsap";
 
 /** Perguntas frequentes: acordeão acessível (Radix) com altura animada + FAQPage em JSON-LD. */
 export function Faq() {
   const root = useRef<HTMLElement>(null);
   useGsap(root, (mm, el) => {
     splitReveal(mm, Array.from(el.querySelectorAll("[data-split]")));
-    revealBatch(mm, el);
   }, [], { defer: true });
   const jsonLd = {
     "@context": "https://schema.org",
@@ -28,8 +26,7 @@ export function Faq() {
       <div className="mx-auto grid max-w-[1800px] gap-14 px-[var(--gutter)] lg:grid-cols-12">
         <div className="lg:col-span-4">
           <div className="lg:sticky lg:top-32">
-            <Eyebrow>Dúvidas frequentes</Eyebrow>
-            <h2 id="faq-title" data-split data-hide className="display mt-6 text-[clamp(2.6rem,5.6vw,6rem)]">
+            <h2 id="faq-title" data-split data-hide className="display text-[clamp(2.6rem,5.6vw,6rem)]">
               Perguntas
               <br />
               diretas<span className="text-dot">.</span>

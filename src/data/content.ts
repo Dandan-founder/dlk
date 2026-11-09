@@ -1,9 +1,9 @@
 /** Textos editáveis das seções da home. */
 
 export const hero = {
-  eyebrow: "Agência digital · Sites e experiências",
   lines: ["Seu negócio", "merece mais", "que um site"],
   sub: "Criamos experiências digitais que destacam sua marca e transformam visitantes em oportunidades.",
+  note: "Orçamento sem custo: você recebe escopo, prazo e investimento antes de decidir.",
   primary: "Quero meu site",
   secondary: "Explorar projetos",
 };

@@ -8,7 +8,6 @@ import { site } from "@/config/site";
 import { KindBadge } from "@/components/projects/ProjectCard";
 import { ButtonLink } from "@/components/ui/Button";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { CaseReveal } from "@/components/projects/CaseReveal";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -32,7 +31,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 function Block({ k, title, children }: { k: string; title: string; children: React.ReactNode }) {
   return (
     <div data-reveal className="grid gap-4 border-t border-line py-10 md:grid-cols-12 md:gap-10 md:py-14">
-      <p className="font-mono text-xs text-muted md:col-span-2">{k}</p>
+      <p className="font-display text-[1.05rem] tabular-nums text-dot md:col-span-2">{k}</p>
       <h2 className="text-[clamp(1.6rem,2.6vw,2.3rem)] font-semibold leading-tight tracking-[-0.03em] md:col-span-3">{title}</h2>
       <div className="text-[1.1rem] leading-relaxed text-muted md:col-span-6 md:col-start-7">{children}</div>
     </div>
@@ -66,8 +65,8 @@ export default async function CasePage({ params }: Params) {
           </Link>
           <div className="hero-fade mt-10 flex flex-wrap items-center gap-3" style={{ ["--d" as string]: "0.05s" }}>
             <KindBadge kind={p.kind} />
-            <span className="font-mono text-xs uppercase tracking-[0.18em] text-muted">
-              {p.category} · {p.year}
+            <span className="text-[0.92rem] text-muted">
+              {p.category}, {p.year}
             </span>
           </div>
           <h1 className="display mt-6 text-[clamp(3rem,9vw,10rem)]">
@@ -88,7 +87,7 @@ export default async function CasePage({ params }: Params) {
               ["Tecnologia", p.stack.join(", ")],
             ].map(([k, v]) => (
               <div key={k}>
-                <dt className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted">{k}</dt>
+                <dt className="text-[0.88rem] text-muted">{k}</dt>
                 <dd className="mt-2 text-[0.98rem]">{v}</dd>
               </div>
             ))}
@@ -133,8 +132,7 @@ export default async function CasePage({ params }: Params) {
 
       <section aria-labelledby="galeria-title" className="bg-ink py-20 md:py-32">
         <div className="mx-auto max-w-[1800px] px-[var(--gutter)]">
-          <Eyebrow>Galeria</Eyebrow>
-          <h2 id="galeria-title" className="display mt-6 text-[clamp(2.4rem,5vw,5rem)]">
+          <h2 id="galeria-title" className="display text-[clamp(2.4rem,5vw,5rem)]">
             Por dentro do projeto<span className="text-dot">.</span>
           </h2>
           <div className="mt-14 grid gap-6 lg:grid-cols-12">
@@ -157,8 +155,7 @@ export default async function CasePage({ params }: Params) {
       <section aria-labelledby="demo-title" className="bg-void py-20 md:py-28">
         <div className="mx-auto grid max-w-[1800px] gap-10 px-[var(--gutter)] lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <Eyebrow>Demonstração</Eyebrow>
-            <h2 id="demo-title" className="display mt-6 text-[clamp(2.4rem,5vw,5rem)]">
+            <h2 id="demo-title" className="display text-[clamp(2.4rem,5vw,5rem)]">
               {p.demoUrl ? "Veja funcionando" : "Demonstração ao vivo em breve"}
               <span className="text-dot">.</span>
             </h2>
@@ -187,7 +184,7 @@ export default async function CasePage({ params }: Params) {
       <Link href={`/projetos/${next.slug}`} data-cursor="view" data-cursor-label="Próximo" className="group block border-t border-line bg-void">
         <div className="mx-auto flex max-w-[1800px] items-end justify-between gap-6 px-[var(--gutter)] py-16 md:py-24">
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted">Próximo projeto</p>
+            <p className="text-[0.95rem] text-muted">Próximo projeto</p>
             <p className="mt-4 text-[clamp(2.4rem,7vw,7rem)] font-bold leading-none tracking-[-0.05em] transition-colors duration-500 group-hover:text-dot">{next.name}</p>
           </div>
           <ArrowUpRight className="mb-2 h-10 w-10 shrink-0 transition-transform duration-500 group-hover:rotate-45 md:h-16 md:w-16" aria-hidden />

@@ -8,7 +8,7 @@ import { mailtoUrl, whatsappUrl } from "@/lib/whatsapp";
 function Col({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <p className="eyebrow text-muted">{title}</p>
+      <p className="text-[0.88rem] text-muted">{title}</p>
       <ul className="mt-5 space-y-2.5 text-[0.95rem]">{children}</ul>
     </div>
   );
@@ -26,9 +26,9 @@ export function Footer() {
     <footer className="relative overflow-hidden border-t border-line bg-void pt-20 md:pt-28">
       <div className="mx-auto grid max-w-[1800px] gap-14 px-[var(--gutter)] lg:grid-cols-12">
         <div className="lg:col-span-4">
-          <p className="max-w-sm text-[clamp(1.5rem,2.4vw,2.1rem)] font-semibold leading-[1.1] tracking-[-0.03em]">{site.statement}</p>
+          <p className="max-w-sm font-display text-[clamp(1.9rem,3vw,2.8rem)] font-bold leading-[1] [font-stretch:80%]">{site.statement}</p>
           <Link href="/orcamento" className="mt-8 inline-flex items-center gap-3 text-[0.95rem] text-dot underline-offset-8 hover:underline">
-            Começar um projeto <span aria-hidden>→</span>
+            Começar um projeto
           </Link>
         </div>
         <div className="grid grid-cols-2 gap-10 sm:grid-cols-4 lg:col-span-8">

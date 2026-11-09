@@ -104,15 +104,14 @@ export function Header() {
                 <ul className="mt-10 flex flex-col gap-1">
                   {[{ href: "/", label: "Início" }, ...nav, { href: "/orcamento", label: "Orçamento" }].map((l, i) => (
                     <li key={l.href} style={{ animationDelay: `${0.08 + i * 0.05}s` }} className="animate-[menu-item_.7s_var(--ease-out)_both]">
-                      <Link href={l.href} onClick={() => setOpen(false)} className="group flex items-baseline gap-4 py-2 text-[clamp(2.4rem,11vw,3.6rem)] font-semibold leading-none tracking-[-0.04em]">
-                        <span className="font-mono text-xs font-normal tracking-normal text-muted">{String(i + 1).padStart(2, "0")}</span>
-                        <span className="transition-colors group-hover:text-dot">{l.label}</span>
+                      <Link href={l.href} onClick={() => setOpen(false)} className="group flex items-baseline gap-4 py-1.5 font-display text-[clamp(2.8rem,13vw,4.2rem)] font-bold leading-none [font-stretch:78%]">
+                                                <span className="transition-colors group-hover:text-dot">{l.label}</span>
                       </Link>
                     </li>
                   ))}
                 </ul>
                 <div className="mt-auto pt-12">
-                  <p className="eyebrow text-muted">Vamos conversar</p>
+                  <p className="text-[0.95rem] text-muted">Vamos conversar</p>
                   <div className="mt-4 flex flex-wrap gap-3">
                     <ButtonLink href="/orcamento" magnetic={false}>
                       Pedir orçamento

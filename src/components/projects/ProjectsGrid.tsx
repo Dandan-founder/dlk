@@ -26,7 +26,7 @@ export function ProjectsGrid() {
               className={cn("inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-[0.92rem] transition-colors", cat === c ? "border-dot bg-dot text-void" : "border-line-strong text-muted hover:border-text/50 hover:text-text")}
             >
               {c}
-              <span className={cn("font-mono text-[0.7rem]", cat === c ? "text-void/75" : "text-muted")}>{n}</span>
+              <span className={cn("tabular-nums text-[0.8rem]", cat === c ? "text-void/70" : "text-muted")}>{n}</span>
             </button>
           );
         })}
@@ -41,7 +41,7 @@ export function ProjectsGrid() {
         ))}
         {list.length === 0 && (
           <div className="flex min-h-[22rem] flex-col items-start justify-end rounded-3xl border border-dashed border-line-strong p-8 md:col-span-2 md:p-12">
-            <p className="font-mono text-xs uppercase tracking-[0.18em] text-muted">{cat} · em breve</p>
+            <p className="text-[0.95rem] text-muted">{cat}, em breve</p>
             <p className="mt-4 max-w-2xl text-[clamp(1.6rem,3vw,2.6rem)] font-semibold leading-tight tracking-[-0.03em]">
               Ainda não publicamos um projeto de {cat.toLowerCase()}. O primeiro pode ser o seu<span className="text-dot">.</span>
             </p>

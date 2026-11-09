@@ -4,7 +4,7 @@ export default function NotFound() {
   return (
     <section className="grain relative grid min-h-[100svh] place-items-center overflow-clip bg-void px-[var(--gutter)] text-center">
       <div>
-        <p className="font-mono text-xs uppercase tracking-[0.22em] text-muted">Erro 404</p>
+        <p className="text-[0.95rem] text-muted">Erro 404</p>
         <h1 className="display mt-6 text-[clamp(3rem,10vw,9rem)]">
           Página não<br />encontrada<span className="text-dot">.</span>
         </h1>

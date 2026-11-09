@@ -7,11 +7,10 @@ import { Monitor, Smartphone } from "lucide-react";
 import { segments } from "@/data/showcase";
 import { projectBySlug } from "@/data/projects";
 import { site } from "@/config/site";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { ButtonLink } from "@/components/ui/Button";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { MiniSite } from "@/components/showcase/MiniSite";
-import { revealBatch, splitReveal, useGsap } from "@/lib/gsap";
+import { splitReveal, useGsap } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 
 type Device = "desktop" | "mobile";
@@ -30,7 +29,6 @@ export function Showcase() {
 
   useGsap(root, (mm, el) => {
     splitReveal(mm, Array.from(el.querySelectorAll("[data-split]")));
-    revealBatch(mm, el);
   }, [], { defer: true });
 
   const onKey = (e: React.KeyboardEvent) => {
@@ -48,8 +46,7 @@ export function Showcase() {
       <div className="relative mx-auto max-w-[1800px] px-[var(--gutter)]">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-8">
-            <Eyebrow>Modelos por segmento</Eyebrow>
-            <h2 id="modelos-title" data-split data-hide className="display mt-6 text-[clamp(2.8rem,7.6vw,8.4rem)]">
+            <h2 id="modelos-title" data-split data-hide className="display text-[clamp(2.8rem,7.6vw,8.4rem)]">
               Imagine seu
               <br />
               negócio assim<span className="text-dot">.</span>
@@ -84,8 +81,8 @@ export function Showcase() {
           {/* Prévia */}
           <div className="lg:col-span-8">
             <div className="flex flex-wrap items-center justify-between gap-4">
-              <p className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted">
-                {project ? "Capturas reais · projeto conceito" : "Prévia de layout · ilustrativa"}
+              <p className="text-[0.88rem] text-muted">
+                {project ? "Capturas reais do projeto conceito" : "Prévia de layout ilustrativa"}
               </p>
               <div role="group" aria-label="Tamanho da tela" className="flex rounded-full border border-line-strong p-1">
                 {(["desktop", "mobile"] as const).map((d) => (
@@ -126,10 +123,10 @@ export function Showcase() {
             <p className="text-[clamp(1.6rem,2.6vw,2.4rem)] font-semibold leading-[1.05] tracking-[-0.03em]">{seg.title}</p>
             <p className="mt-4 leading-relaxed text-muted">{seg.text}</p>
             <ul className="mt-8 divide-y divide-line border-y border-line">
-              {seg.features.map((f, k) => (
+              {seg.features.map((f) => (
                 <li key={f} className="flex items-center justify-between py-3.5 text-[0.98rem]">
                   {f}
-                  <span className="font-mono text-xs text-muted">{String(k + 1).padStart(2, "0")}</span>
+                  <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-dot/80" />
                 </li>
               ))}
             </ul>

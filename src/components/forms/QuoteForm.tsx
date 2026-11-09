@@ -346,7 +346,7 @@ export function QuoteForm() {
 function Progress({ value, label }: { value: number; label: string }) {
   return (
     <div>
-      <div className="flex items-center justify-between font-mono text-[0.72rem] uppercase tracking-[0.18em] text-muted">
+      <div className="flex items-center justify-between text-[0.88rem] text-muted">
         <span>{label}</span>
         <span>{value}%</span>
       </div>

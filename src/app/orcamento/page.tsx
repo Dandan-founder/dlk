@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { QuoteForm } from "@/components/forms/QuoteForm";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { site } from "@/config/site";
 
@@ -18,9 +17,6 @@ export default function OrcamentoPage() {
       <div className="relative mx-auto grid max-w-[1800px] gap-16 px-[var(--gutter)] lg:grid-cols-12" style={{ ["--hero-delay" as string]: "0.05s" }}>
         <div className="lg:col-span-4">
           <div className="lg:sticky lg:top-32">
-            <div className="hero-fade" style={{ ["--d" as string]: "0s" }}>
-              <Eyebrow>Orçamento</Eyebrow>
-            </div>
             <h1 className="display mt-8 text-[clamp(3rem,6.6vw,6.6rem)]">
               <span className="hero-line" style={{ ["--i" as string]: 0 }}>
                 <span>Vamos</span>

@@ -4,11 +4,10 @@ import { useRef, useState } from "react";
 import { Plus } from "lucide-react";
 import { services, type Service } from "@/data/services";
 import { site } from "@/config/site";
-import { Eyebrow } from "@/components/ui/Eyebrow";
 import { ButtonLink } from "@/components/ui/Button";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { cn } from "@/lib/utils";
-import { revealBatch, splitReveal, useGsap } from "@/lib/gsap";
+import { splitReveal, useGsap } from "@/lib/gsap";
 import { ServiceVisual } from "./ServiceVisual";
 
 function Detail({ s }: { s: Service }) {
@@ -44,7 +43,6 @@ export function Services() {
   const [openMobile, setOpenMobile] = useState<number | null>(0);
   useGsap(root, (mm, el) => {
     splitReveal(mm, Array.from(el.querySelectorAll("[data-split]")));
-    revealBatch(mm, el);
   }, [], { defer: true });
 
   return (
@@ -52,11 +50,10 @@ export function Services() {
       <div className="mx-auto max-w-[1800px] px-[var(--gutter)]">
         <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <Eyebrow>Serviços</Eyebrow>
-            <h2 id="servicos-title" data-split data-hide className="display mt-6 text-[clamp(2.8rem,7vw,7.6rem)]">
+            <h2 id="servicos-title" data-split data-hide className="display text-[clamp(2.8rem,7vw,7.6rem)]">
               O que a DLK
               <br />
-              <span className="text-muted">faz por você</span>
+              faz por você
             </h2>
           </div>
           <p data-reveal className="measure text-[1.05rem] leading-relaxed text-muted lg:col-span-4 lg:col-start-9">
@@ -83,9 +80,9 @@ export function Services() {
                     aria-controls={`servico-painel-${s.id}`}
                     className="group grid w-full grid-cols-[2.5rem_1fr_auto] items-center gap-4 py-6 text-left md:grid-cols-[3.5rem_1fr_auto] md:py-8"
                   >
-                    <span className={cn("font-mono text-xs transition-colors", on ? "text-dot" : "text-muted")}>{s.n}</span>
+                    <span className={cn("font-display text-[1rem] tabular-nums transition-colors", on ? "text-dot" : "text-muted")}>{s.n}</span>
                     <span>
-                      <span className={cn("block text-[clamp(1.6rem,3.4vw,3.3rem)] font-semibold leading-[1.02] tracking-[-0.035em] transition-[color,transform] duration-500 ease-[var(--ease-out)]", on ? "translate-x-2 text-text" : "text-text/45 group-hover:text-text/80")}>
+                      <span className={cn("display block text-[clamp(2rem,4.2vw,4.2rem)] transition-[color,transform] duration-500 ease-[var(--ease-out)]", on ? "translate-x-2 text-text" : "text-text/45 group-hover:text-text/80")}>
                         {s.name}
                       </span>
                       <span className={cn("mt-2 block text-[0.95rem] text-muted transition-opacity duration-500", on ? "opacity-100" : "opacity-0 max-lg:opacity-100")}>{s.line}</span>
@@ -106,7 +103,7 @@ export function Services() {
           {/* desktop: painel fixo */}
           <aside aria-label="Detalhes do serviço" className="hidden lg:col-span-5 lg:block">
             <div className="sticky top-28 rounded-3xl border border-line bg-ink p-8 xl:p-10">
-              <p className="eyebrow flex items-center justify-between text-muted">
+              <p className="flex items-center justify-between text-[0.92rem] text-muted">
                 <span>{services[active].name}</span>
                 <span className="text-dot">{services[active].n}/07</span>
               </p>

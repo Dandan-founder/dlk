@@ -20,6 +20,8 @@ export type Project = {
   /** Cor de destaque do próprio projeto (usada em detalhes da página de case). */
   accent: string;
   cover: Shot;
+  /** Captura da página inteira (1000×6400), usada na prévia que rola no hover. */
+  full: Shot;
   mobile: Shot;
   gallery: Shot[];
   services: string[];
@@ -52,6 +54,7 @@ export const projects: Project[] = [
     summary: "Barbearia premium com agendamento online em tempo real e painel completo para a equipe.",
     accent: "#B89B65",
     cover: shot("blackstone-barber-club", "cover", "Página inicial do Blackstone Barber Club: título grande sobre foto escura de um barbeiro aparando uma barba"),
+    full: { src: "/projects/blackstone-barber-club/full.webp", alt: "Página inicial completa do Blackstone Barber Club", w: 1000, h: 6400, device: "desktop" },
     mobile: shot("blackstone-barber-club", "mobile", "Tela de agendamento do Blackstone no celular", "mobile"),
     gallery: [
       shot("blackstone-barber-club", "ritual", "Seção O ritual, com um poste de barbeiro em 3D e os passos do atendimento"),
@@ -89,6 +92,7 @@ export const projects: Project[] = [
     summary: "Pizzaria napolitana com cardápio interativo, pedido montado no site e envio pelo WhatsApp.",
     accent: "#B3261E",
     cover: shot("brace-pizzaria", "cover", "Página inicial da Brace Pizzaria: pizza girando sobre fundo escuro e o título Fogo, farinha e tempo"),
+    full: { src: "/projects/brace-pizzaria/full.webp", alt: "Página inicial completa da Brace Pizzaria", w: 1000, h: 6400, device: "desktop" },
     mobile: shot("brace-pizzaria", "mobile", "Cardápio da Brace no celular", "mobile"),
     gallery: [
       shot("brace-pizzaria", "forno", "Seção O forno, com um forno a lenha em 3D aceso"),

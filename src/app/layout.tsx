@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter_Tight, JetBrains_Mono } from "next/font/google";
+import { Bricolage_Grotesque, Instrument_Sans } from "next/font/google";
 import "./globals.css";
 import { site } from "@/config/site";
 import { Logo } from "@/components/brand/Logo";
@@ -7,13 +7,14 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { Cursor } from "@/components/layout/Cursor";
+import { MobileCta } from "@/components/layout/MobileCta";
 
-const sans = Inter_Tight({ subsets: ["latin"], variable: "--font-inter-tight", display: "swap" });
-const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains", display: "swap", weight: ["400", "500"] });
+const display = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-display-face", display: "swap", axes: ["opsz", "wdth"] });
+const text = Instrument_Sans({ subsets: ["latin"], variable: "--font-text", display: "swap", axes: ["wdth"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: "DLK Agência Digital · Sites que destacam o seu negócio", template: "%s · DLK Agência Digital" },
+  title: { default: "DLK Agência Digital | Sites que destacam o seu negócio", template: "%s | DLK Agência Digital" },
   description: site.description,
   applicationName: "DLK",
   alternates: { canonical: "/" },
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     siteName: "DLK Agência Digital",
-    title: "DLK Agência Digital · Seu negócio merece mais que um site",
+    title: "DLK Agência Digital | Seu negócio merece mais que um site",
     description: site.description,
     images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "DLK Agência Digital" }],
   },
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
   formatDetection: { telephone: false },
 };
 
-export const viewport: Viewport = { themeColor: "#070B16", colorScheme: "dark", viewportFit: "cover" };
+export const viewport: Viewport = { themeColor: "#13213C", colorScheme: "dark", viewportFit: "cover" };
 
 /** Decide, antes da primeira pintura, se a abertura toca (só na 1ª visita da sessão e sem movimento reduzido). */
 const introScript = `(function(){var d=document.documentElement;d.classList.add('js');var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;if(!rm)d.classList.add('js-motion');try{if(rm||sessionStorage.getItem('dlk:intro')){d.classList.add('intro-skip');return}sessionStorage.setItem('dlk:intro','1')}catch(e){}setTimeout(function(){d.classList.add('intro-done')},1600)})();`;
@@ -53,7 +54,7 @@ const orgJsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${sans.variable} ${mono.variable}`} suppressHydrationWarning>
+    <html lang="pt-BR" className={`${display.variable} ${text.variable}`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: introScript }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
@@ -73,6 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Header />
           <main id="conteudo">{children}</main>
           <Footer />
+          <MobileCta />
         </SmoothScroll>
         <Cursor />
       </body>
