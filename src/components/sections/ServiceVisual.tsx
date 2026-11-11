@@ -116,12 +116,16 @@ export function ServiceVisual({ kind }: { kind: Service["visual"] }) {
                 <span key={i} className="bg-[#b9b4a8]" />
               ))}
             </div>
-            <div className="sv-wipe absolute inset-0 flex flex-col justify-end gap-2 bg-[#0d1528] p-5">
-              <span className="h-5 w-[75%] rounded bg-white/85" />
-              <span className="h-5 w-[50%] rounded bg-white/85" />
-              <span className="mt-2 h-7 w-24 rounded-full bg-dot" />
+            <div className="sv-wipe absolute inset-0 overflow-hidden">
+              <div className="sv-wipe-in absolute inset-0 flex flex-col justify-end gap-2 bg-[#0d1528] p-5">
+                <span className="h-5 w-[75%] rounded bg-white/85" />
+                <span className="h-5 w-[50%] rounded bg-white/85" />
+                <span className="mt-2 h-7 w-24 rounded-full bg-dot" />
+              </div>
             </div>
-            <span className="sv-wipe-line absolute inset-y-0 w-0.5 bg-dot" />
+            <span className="sv-wipe-line absolute inset-0">
+              <span className="absolute inset-y-0 left-0 w-0.5 bg-dot" />
+            </span>
           </div>
         </Frame>
       );

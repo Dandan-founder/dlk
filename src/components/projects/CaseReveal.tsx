@@ -11,7 +11,10 @@ export function CaseReveal({ children }: { children: React.ReactNode }) {
     mm.add(MQ.motion, () => {
       const cover = el.querySelector("[data-case-cover]");
       if (!cover) return;
-      gsap.fromTo(cover, { clipPath: "inset(6% 10% 0% 10% round 28px)" }, { clipPath: "inset(0% 0% 0% 0% round 24px)", ease: "none", scrollTrigger: { trigger: cover, start: "top 95%", end: "top 30%", scrub: 0.5 } });
+      // abre com a rolagem só com transform (moldura cresce, imagem interna compensa); sem clip-path
+      const st = { trigger: cover, start: "top 95%", end: "top 30%", scrub: 0.5 };
+      gsap.fromTo(cover, { scale: 0.82, transformOrigin: "50% 0%" }, { scale: 1, ease: "none", scrollTrigger: st });
+      gsap.fromTo(cover.querySelectorAll("img"), { scale: 1.15 }, { scale: 1, ease: "none", scrollTrigger: st });
     });
   });
   return <div ref={ref}>{children}</div>;

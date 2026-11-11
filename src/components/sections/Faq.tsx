@@ -43,7 +43,7 @@ export function Faq() {
               <Accordion.Header>
                 <Accordion.Trigger className="group flex w-full items-center justify-between gap-6 py-7 text-left md:py-8">
                   <span className="text-[clamp(1.2rem,2vw,1.6rem)] font-medium tracking-[-0.02em] transition-colors group-hover:text-dot">{f.q}</span>
-                  <span aria-hidden className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-line-strong transition-all duration-500 group-data-[state=open]:rotate-45 group-data-[state=open]:border-dot group-data-[state=open]:bg-dot">
+                  <span aria-hidden className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-line-strong transition-[transform,translate,rotate,scale,background-color,border-color,color] duration-500 group-data-[state=open]:rotate-45 group-data-[state=open]:border-dot group-data-[state=open]:bg-dot">
                     <Plus className="h-4 w-4" />
                   </span>
                 </Accordion.Trigger>
@@ -55,7 +55,7 @@ export function Faq() {
           ))}
         </Accordion.Root>
       </div>
-      <style>{`@keyframes acc-down{from{height:0;opacity:0}to{height:var(--radix-accordion-content-height);opacity:1}}@keyframes acc-up{from{height:var(--radix-accordion-content-height)}to{height:0;opacity:0}}`}</style>
+      <style>{`@keyframes acc-down{from{opacity:0;transform:translateY(-8px)}}@keyframes acc-up{to{opacity:0;transform:translateY(-8px)}}`}</style>
     </section>
   );
 }

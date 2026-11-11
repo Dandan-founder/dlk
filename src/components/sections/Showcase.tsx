@@ -98,7 +98,7 @@ export function Showcase() {
               <div
                 key={seg.id + device}
                 className={cn(
-                  "animate-[panel-in_.7s_var(--ease-out)_both] overflow-hidden border border-white/10 bg-ink-2 shadow-[0_40px_100px_-40px_rgba(0,0,0,.9)] transition-[width,height,border-radius] duration-700 ease-[var(--ease-out)]",
+                  "animate-[panel-in_.7s_var(--ease-out)_both] overflow-hidden border border-white/10 bg-ink-2 shadow-[0_40px_100px_-40px_rgba(0,0,0,.9)]",
                   device === "desktop" ? "aspect-[16/10] w-full max-w-full rounded-xl" : "h-full max-h-full w-auto aspect-[390/844] rounded-[2rem] border-[6px] border-[#0b0f1b]",
                 )}
               >

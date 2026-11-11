@@ -76,10 +76,13 @@ export function Cursor() {
     <div aria-hidden className="pointer-events-none fixed inset-0 z-[100]">
       <div ref={ring} className="absolute left-0 top-0">
         <div
-          className="grid -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border transition-[width,height,background-color,border-color,opacity] duration-500 ease-[var(--ease-out)]"
+          className="grid place-items-center rounded-full border transition-[transform,background-color,border-color,opacity] duration-500 ease-[var(--ease-out)]"
           style={{
-            width: ringSize,
-            height: ringSize,
+            // tamanho fixo e escala (transform) em vez de animar width/height; a borda compensa a escala
+            width: 104,
+            height: 104,
+            transform: `translate(-50%, -50%) scale(${ringSize / 104})`,
+            borderWidth: 104 / ringSize,
             opacity: mode === "hidden" ? 0 : 1,
             borderColor: mode === "view" ? "transparent" : mode === "link" ? "rgba(242,106,28,.8)" : "rgba(244,245,248,.35)",
             backgroundColor: mode === "view" ? "var(--dot)" : mode === "link" ? "rgba(242,106,28,.08)" : "transparent",
@@ -89,7 +92,7 @@ export function Cursor() {
         </div>
       </div>
       <div ref={dot} className="absolute left-0 top-0">
-        <div className={`h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-dot transition-[transform,opacity] duration-300 ${mode === "default" ? "scale-100 opacity-100" : "scale-0 opacity-0"}`} />
+        <div className={`h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-dot transition-[transform,translate,rotate,scale,opacity] duration-300 ${mode === "default" ? "scale-100 opacity-100" : "scale-0 opacity-0"}`} />
       </div>
     </div>
   );

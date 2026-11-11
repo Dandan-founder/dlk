@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 
 export function KindBadge({ kind, className }: { kind: Project["kind"]; className?: string }) {
   return (
-    <span className={cn("inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[0.8rem] backdrop-blur", kind === "conceito" ? "border-white/25 bg-void/60 text-text" : "border-dot/60 bg-dot/15 text-text", className)}>
+    <span className={cn("inline-flex items-center gap-2 rounded-full border px-3 py-1 text-[0.8rem]", kind === "conceito" ? "border-white/25 bg-void/85 text-text" : "border-dot/60 bg-void/85 text-text", className)}>
       <span aria-hidden className={cn("h-1.5 w-1.5 rounded-full", kind === "conceito" ? "bg-white/70" : "bg-dot")} />
       {kind === "conceito" ? "Projeto conceito" : "Cliente"}
     </span>
@@ -26,8 +26,12 @@ export function ProjectCard({ project: p, size = "lg", headingLevel = 3 }: { pro
   const root = useRef<HTMLElement>(null);
   useGsap(root, (mm, el) => {
     mm.add(MQ.motion, () => {
+      // abertura só com transform: a moldura cresce e a imagem de dentro "desinfla" (sem clip-path, que repinta a cada quadro)
       const frame = el.querySelector("[data-frame]");
-      gsap.fromTo(frame, { clipPath: "inset(14% 8% 14% 8% round 24px)" }, { clipPath: "inset(0% 0% 0% 0% round 24px)", duration: 1.4, ease: "expo.out", scrollTrigger: { trigger: el, start: "top 85%", once: true } });
+      const imgs = el.querySelectorAll("[data-frame] img");
+      const st = { trigger: el, start: "top 85%", once: true };
+      gsap.fromTo(frame, { scale: 0.86 }, { scale: 1, duration: 1.4, ease: "expo.out", scrollTrigger: st });
+      gsap.fromTo(imgs, { scale: 1.18 }, { scale: 1, duration: 1.6, ease: "expo.out", scrollTrigger: st });
     });
   }, [], { defer: true });
 
@@ -42,12 +46,12 @@ export function ProjectCard({ project: p, size = "lg", headingLevel = 3 }: { pro
             <Image src={p.full.src} alt="" width={p.full.w} height={p.full.h} sizes={size === "lg" ? "(min-width: 1024px) 66vw, 100vw" : "(min-width: 768px) 50vw, 100vw"} className="block h-auto w-full" />
           </div>
           <div aria-hidden className="absolute inset-0 bg-gradient-to-t from-void/60 via-transparent to-transparent transition-opacity duration-500 group-hover:opacity-0" />
-          <span aria-hidden className="absolute bottom-5 left-5 rounded-full bg-void/70 px-3 py-1 text-[0.8rem] text-text/85 opacity-0 backdrop-blur transition-opacity duration-500 group-hover:opacity-100 md:bottom-7 md:left-7">
+          <span aria-hidden className="absolute bottom-5 left-5 rounded-full bg-void/85 px-3 py-1 text-[0.8rem] text-text/85 opacity-0 transition-opacity duration-500 group-hover:opacity-100 md:bottom-7 md:left-7">
             Percorrendo o site
           </span>
           <div className="absolute left-5 top-5 flex flex-wrap gap-2 md:left-7 md:top-7">
             <KindBadge kind={p.kind} />
-            <span className="rounded-full border border-white/15 bg-void/50 px-3 py-1 text-[0.8rem] text-text/85 backdrop-blur">{p.category}</span>
+            <span className="rounded-full border border-white/15 bg-void/85 px-3 py-1 text-[0.8rem] text-text/85">{p.category}</span>
           </div>
           {/* celular de canto, com a versão mobile */}
           <div aria-hidden className="absolute bottom-[-12%] right-[5%] hidden w-[17%] translate-y-6 overflow-hidden rounded-[1.4rem] border-[5px] border-[#0b0f1b] shadow-2xl transition-transform duration-700 ease-[var(--ease-out)] group-hover:-translate-y-4 md:block">
@@ -63,7 +67,7 @@ export function ProjectCard({ project: p, size = "lg", headingLevel = 3 }: { pro
             <p className="mt-3 max-w-xl text-[1rem] leading-relaxed text-muted">{p.summary}</p>
             <span className="sr-only">Ver estudo de caso</span>
           </div>
-          <span aria-hidden className="mt-1 grid h-12 w-12 shrink-0 place-items-center rounded-full border border-line-strong transition-all duration-500 group-hover:rotate-45 group-hover:border-dot group-hover:bg-dot">
+          <span aria-hidden className="mt-1 grid h-12 w-12 shrink-0 place-items-center rounded-full border border-line-strong transition-[transform,translate,rotate,scale,background-color,border-color,color] duration-500 group-hover:rotate-45 group-hover:border-dot group-hover:bg-dot">
             <ArrowUpRight className="h-5 w-5" />
           </span>
         </div>

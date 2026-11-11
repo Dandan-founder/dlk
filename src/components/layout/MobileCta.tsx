@@ -26,7 +26,7 @@ export function MobileCta() {
   return (
     <div
       className={cn(
-        "fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-40 flex items-center justify-between gap-3 rounded-full border border-line-strong bg-void/85 py-2 pl-5 pr-2 backdrop-blur-xl transition-[transform,opacity] duration-500 ease-[var(--ease-out)] md:hidden",
+        "fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-40 flex items-center justify-between gap-3 rounded-full border border-line-strong bg-void py-2 pl-5 pr-2 transition-[transform,translate,rotate,scale,opacity] duration-500 ease-[var(--ease-out)] md:hidden",
         show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-[150%] opacity-0",
       )}
       aria-hidden={!show}

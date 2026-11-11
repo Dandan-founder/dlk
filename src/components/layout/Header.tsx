@@ -47,8 +47,8 @@ export function Header() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-[transform,background-color,border-color] duration-500 ease-[var(--ease-out)]",
-        solid ? "border-b border-line bg-void/70 backdrop-blur-xl" : "border-b border-transparent",
+        "fixed inset-x-0 top-0 z-50 transition-[transform,translate,rotate,scale,background-color,border-color] duration-500 ease-[var(--ease-out)]",
+        solid ? "border-b border-line bg-void" : "border-b border-transparent",
         hidden && !open ? "-translate-y-full" : "translate-y-0",
       )}
     >
@@ -128,7 +128,7 @@ export function Header() {
           </Dialog.Root>
         </div>
       </nav>
-      <style>{`@keyframes menu-in{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}@keyframes menu-item{from{opacity:0;transform:translateY(40%)}}`}</style>
+      <style>{`@keyframes menu-in{from{transform:translateY(-100%)}to{transform:none}}@keyframes menu-item{from{opacity:0;transform:translateY(40%)}}`}</style>
     </header>
   );
 }

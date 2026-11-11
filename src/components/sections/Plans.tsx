@@ -63,7 +63,7 @@ export function Plans() {
               data-tilt
               data-reveal
               className={cn(
-                "group relative flex flex-col overflow-hidden rounded-3xl border p-8 transition-[transform,border-color] duration-700 ease-[var(--ease-out)] hover:-translate-y-2 md:p-10",
+                "group relative flex flex-col overflow-hidden rounded-3xl border p-8 transition-[transform,translate,rotate,scale,border-color] duration-700 ease-[var(--ease-out)] hover:-translate-y-2 md:p-10",
                 p.highlight ? "border-dot/60 bg-gradient-to-b from-navy to-ink" : "border-line bg-ink",
               )}
             >

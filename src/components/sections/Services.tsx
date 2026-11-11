@@ -82,12 +82,12 @@ export function Services() {
                   >
                     <span className={cn("font-display text-[1rem] tabular-nums transition-colors", on ? "text-dot" : "text-muted")}>{s.n}</span>
                     <span>
-                      <span className={cn("display block text-[clamp(2rem,4.2vw,4.2rem)] transition-[color,transform] duration-500 ease-[var(--ease-out)]", on ? "translate-x-2 text-text" : "text-text/45 group-hover:text-text/80")}>
+                      <span className={cn("display block text-[clamp(2rem,4.2vw,4.2rem)] transition-[color,transform,translate,rotate,scale] duration-500 ease-[var(--ease-out)]", on ? "translate-x-2 text-text" : "text-text/45 group-hover:text-text/80")}>
                         {s.name}
                       </span>
                       <span className={cn("mt-2 block text-[0.95rem] text-muted transition-opacity duration-500", on ? "opacity-100" : "opacity-0 max-lg:opacity-100")}>{s.line}</span>
                     </span>
-                    <span aria-hidden className={cn("grid h-10 w-10 place-items-center rounded-full border transition-all duration-500", on ? "rotate-45 border-dot bg-dot text-white" : "border-line-strong text-muted")}>
+                    <span aria-hidden className={cn("grid h-10 w-10 place-items-center rounded-full border transition-[transform,translate,rotate,scale,background-color,border-color,color] duration-500", on ? "rotate-45 border-dot bg-dot text-white" : "border-line-strong text-muted")}>
                       <Plus className="h-4 w-4" />
                     </span>
                   </button>

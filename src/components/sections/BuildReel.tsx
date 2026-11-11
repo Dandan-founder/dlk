@@ -103,6 +103,8 @@ export function BuildReel({ className }: { className?: string }) {
 
   const painted = phase === "paint" || phase === "hold";
 
+  const dur = phase === "out" ? "700ms" : phase === "draw" ? "0ms" : "1000ms";
+
   return (
     <div ref={root} className={className}>
       <figure className="overflow-hidden rounded-[0.9rem] border border-line-strong bg-void shadow-[0_50px_120px_-50px_rgba(0,0,0,.85)]">
@@ -130,22 +132,26 @@ export function BuildReel({ className }: { className?: string }) {
               {wireframes[p.slug]}
             </g>
           </svg>
-          {/* site real pintando por cima */}
+          {/* site real pintando por cima: cortina feita só com transform (a moldura anda e a imagem anda ao contrário) */}
           <div
-            className="absolute inset-0 transition-[clip-path] ease-[var(--ease-in-out)]"
-            style={{
-              clipPath: painted ? "inset(0 0 0 0)" : phase === "out" ? "inset(0 0 0 100%)" : "inset(0 100% 0 0)",
-              transitionDuration: phase === "out" ? "700ms" : phase === "draw" ? "0ms" : "1000ms",
-            }}
+            className="absolute inset-0 overflow-hidden transition-transform ease-[var(--ease-in-out)]"
+            style={{ transform: `translateX(${painted ? 0 : phase === "out" ? 100 : -100}%)`, transitionDuration: dur }}
           >
-            <Image src={p.cover.src} alt={p.cover.alt} fill sizes="(min-width: 1024px) 46vw, 92vw" className="object-cover object-top" priority={i === 0} fetchPriority={i === 0 ? "low" : undefined} />
+            <div
+              className="absolute inset-0 transition-transform ease-[var(--ease-in-out)]"
+              style={{ transform: `translateX(${painted ? 0 : phase === "out" ? -100 : 100}%)`, transitionDuration: dur }}
+            >
+              <Image src={p.cover.src} alt={p.cover.alt} fill sizes="(min-width: 1024px) 46vw, 92vw" className="object-cover object-top" priority={i === 0} fetchPriority={i === 0 ? "low" : undefined} />
+            </div>
           </div>
           {/* agulha da "pintura" */}
           <span
             aria-hidden
-            className="absolute inset-y-0 w-px bg-dot shadow-[0_0_24px_4px_rgba(242,106,28,.55)] transition-[left,opacity] ease-[var(--ease-in-out)]"
-            style={{ left: painted ? "100%" : "0%", opacity: phase === "paint" ? 1 : 0, transitionDuration: phase === "paint" ? "1000ms" : "0ms" }}
-          />
+            className="absolute inset-0 transition-[transform,opacity] ease-[var(--ease-in-out)]"
+            style={{ transform: `translateX(${painted ? 100 : 0}%)`, opacity: phase === "paint" ? 1 : 0, transitionDuration: phase === "paint" ? "1000ms" : "0ms" }}
+          >
+            <span className="absolute inset-y-0 left-0 w-px bg-dot shadow-[0_0_24px_4px_rgba(242,106,28,.55)]" />
+          </span>
         </div>
       </figure>
       <figcaption className="mt-4 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 text-[0.88rem] text-muted">

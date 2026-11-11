@@ -58,7 +58,7 @@ export function Process() {
           <span aria-hidden data-progress className="absolute bottom-0 left-[0.45rem] top-0 w-px origin-top bg-dot" />
           {process.map((p, i) => (
             <li key={p.n} data-step className="relative pb-16 pl-12 last:pb-0 md:pb-24 md:pl-16">
-              <span aria-hidden className={cn("absolute left-0 top-2 h-[0.95rem] w-[0.95rem] rounded-full border-2 transition-all duration-500", i <= current ? "border-dot bg-dot shadow-[0_0_0_6px_rgba(242,106,28,.15)]" : "border-line-strong bg-void")} />
+              <span aria-hidden className={cn("absolute left-0 top-2 h-[0.95rem] w-[0.95rem] rounded-full border-2 transition-[background-color,border-color,box-shadow] duration-500", i <= current ? "border-dot bg-dot shadow-[0_0_0_6px_rgba(242,106,28,.15)]" : "border-line-strong bg-void")} />
               <p className="font-display text-[1.05rem] tabular-nums text-dot">{p.n}</p>
               <h3 className={cn("mt-3 text-[clamp(1.9rem,3.6vw,3.4rem)] font-semibold leading-none tracking-[-0.04em] transition-colors duration-500", i === current ? "text-text" : "text-text/40")}>{p.title}</h3>
               <p className={cn("mt-4 max-w-lg text-[1.05rem] leading-relaxed transition-colors duration-500", i === current ? "text-muted" : "text-muted/80")}>{p.text}</p>
